@@ -1,0 +1,283 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Polo Meninos 2019">
+
+    {% block titulo %}
+    <title tabindex="0">Sistema de Agenda Escolar</title>
+    {% endblock %}
+
+    <!-- Ícone do favicon -->
+    <link href="{% static 'img/favicon.gif' %}" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+
+    <!-- Importação do Bootstrap 4 e do Font awesome -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <!-- CSS adicional -->
+    <link href="{% static 'css/site.css' %}" rel="stylesheet">
+
+    <!-- Importação do Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
+
+     <!-- Libraries Stylesheet -->
+     <link href="{% static "lib/animate/animate.min.css" %}" rel="stylesheet">
+     <link href="{% static "lib/owlcarousel/assets/owl.carousel.min.css" %}" rel="stylesheet">
+           
+    <!-- Ícone na barra de abas -->
+    <!-- <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"> -->
+
+    <!-- Bloco destinado aos estilos para cada página -->
+    {% block styles %}
+
+    {% endblock %}
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <main role="main" class="flex-shrink-0">
+
+
+        <!-- Bloco com a logo da cidade -->
+        {% block logo %}
+        <!-- <div class="container-fluid bg-white">
+            <div class="container border-bottom border-light p-3">
+                <img src="{% static 'img/site-logo.png' %}" alt="" style="max-height: 65px;" class="img-fluid">
+            </div>
+
+        </div> -->
+        {% endblock %}
+
+
+        <!-- Bloco com o menu principal -->
+        {% block menu %}
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-site font-115 shadow">
+            <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-6">
+                <h2 tabindex="0" class="m-2 text-white"><i class="fa fa-book me-3"></i>Agenda Escolar</h2>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+
+            
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link m-3" href="{% url 'index' %}">
+                                <i class="" aria-hidden="true"></i>
+                                Início
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle m-3 text-white" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                Cadastros
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'alimentos-listar' %}">Alimentos</a>
+                                <a class="dropdown-item" href="{% url 'itens-listar' %}">Itens</a>
+                                <a class="dropdown-item" href="{% url 'medicamentos-listar' %}">Medicamentos</a>
+                                <a class="dropdown-item" href="{% url 'turmas-listar' %}">Turmas</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'alunos-listar' %}">Alunos</a>
+                                <a class="dropdown-item" href="{% url 'professores-listar' %}">Professores</a>
+                                <a class="dropdown-item" href="{% url 'responsaveis-listar' %}">Responsáveis</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'responsaveisalunos-listar' %}">Responsáveis por Aluno</a>
+                                <a class="dropdown-item" href="{% url 'matriculas-listar' %}">Matrículas</a>
+                                <a class="dropdown-item" href="{% url 'turmasprofessores-listar' %}">Professores por Turma</a>
+                                <a class="dropdown-item" href="{% url 'prescricoes-listar' %}">Prescrições médicas</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle m-3 text-white" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                Financeiro
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'tabelas-listar' %}">Tabelas de Preços</a>
+                                <a class="dropdown-item" href="{% url 'turmastabelas-listar' %}">Preço para a Turma</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'responsaveismensalidades-listar' %}">Boletos dos Responsáveis</a>
+                                <a class="dropdown-item" href="{% url 'titulosbancarios-listar' %}">Títulos Bancários</a>
+                            </div>
+                        </li>
+
+                        
+                        <li class="nav-item ">
+                            <a class="nav-link m-3" href="{% url 'agenda_lista' %}">
+                                <i class="" aria-hidden="true"></i>
+                                Agenda
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <li class="nav-item ">
+                            <a class="nav-link m-3" href="{% url 'sobre' %}">
+                                <i class="" aria-hidden="true"></i>
+                                Sobre
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item ">
+                            <a class="nav-link m-3" href="#">
+                                <i class="" aria-hidden="true"></i>
+                                Ajuda
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle m-3 text-white" href="#" id="navbarDropdownMenuLink"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <span id="username">{{ request.user }}</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href={% url 'atualizardados' %}>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Meus Dados
+                                </a>
+                                <a class="dropdown-item" href="{% url 'password' %}">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Alterar senha
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    Sair
+                                </a>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'registrar' %}">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                Registrar
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                Login
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+
+                <!-- fim do container -->
+            </div>
+        </nav>
+        {% endblock %}
+
+
+        <!-- Bloco de conteúdo -->
+        <div class="container py-5">
+            {% block conteudo %}
+            {% endblock %}
+        </div>
+
+    </main>
+
+     <!-- <footer class="mt-auto">-->
+
+        <!-- Bloco acima do rodapé com links
+        {% block rodape-links %}
+        <div class="container-fluid text-white p-3">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </div>
+        {% endblock %} -->
+
+
+        <!-- Rodapé 
+        {% block rodape %}
+        <div class="container-fluid bg-light text-center p-3">
+            <div class="row">
+                <div class="col-md-4 mx-auto text-center">
+                    <img src="{% static 'img/UnivespLogo.png' %}" height="48" class="float-left" alt="">
+                    <p>
+                        <span>Universidade Virtual do Estado de São Paulo</span><br>
+                        <span>Desenvolvido pelos alunos dos Pólos Meninos, Hortolândia e Amparo - Turma 2020</span>
+                    </p>
+                </div>
+                <!-- <div class="col-md text-left">
+                    <img src="{% static 'img/UnivespLogo.png' %}" height="100" alt="">
+                </div> 
+
+                </p>
+            </div>-->
+
+        <footer class="container-fluid bg-dark text-light footer p-4 pt-4 mt-4 wow>
+            
+            <div class="container px-4 px-lg-5 ">
+                    
+                <div class="large text-center text-white " aria-label="Todos os direitos reservados PI Univesp">Copyright &copy; Universidade Virtual do Estado de São Paulo -PI-III - Turma 2020 
+                <img src="{% static 'img/UnivespLogo.png' %}" height="60" class="float-align" alt=""></div>
+                    
+            </div>
+
+        </footer>
+        {% endblock %}
+
+    <!-- Importação do JS -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+   
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+
+    <!-- Bloco destinado aos scripts para cada página -->
+    {% block scripts %}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static "lib/wow/wow.min.js" %}"></script>
+    <script src="{% static "lib/easing/easing.min.js" %}"></scrip>
+    <script src="{% static "lib/waypoints/waypoints.min.js" %}"></script>
+    <script src="{% static "lib/owlcarousel/owl.carousel.min.js" %}"></script>
+    
+
+    <!-- Template Javascript -->
+    <script src="{% static "js/main.js" %}"></script>
+
+    <!-- 100% privacy friendly analytics -->
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    
+    {% endblock %}
+
+</body>
+
+</html>
