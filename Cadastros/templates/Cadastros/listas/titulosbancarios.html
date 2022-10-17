@@ -1,0 +1,44 @@
+{% extends 'Paginas/modelo.html' %} {% load static %} {% block conteudo %}
+
+<h3 tabindex="0">Lista de Títulos Bancários</h3>
+<a href="{% url 'titulosbancarios-cadastrar' %}" class="btn btn-primary btn-sm">
+  Acrescentar Título Bancário
+</a>
+<hr />
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th tabindex="0">Aluno</th>
+      <th tabindex="0">Vencimento</th>
+      <th tabindex="0">Valor</th>
+      <th tabindex="0">Pagamento</th>
+    </tr>
+    {% for titulo in object_list %}
+    <tr>
+      <td>{{ titulo.Matricula.Aluno.Pessoa.Nome }}</td>
+      <td>{{ titulo.Vencimento }}</td>
+      <td>{{ titulo.Valor }}</td>
+      <td>{{ titulo.Pagamento }}</td>
+      <td>
+        <a
+          href="{% url 'titulosbancarios-excluir' titulo.pk %}"
+          class="btn btn-danger btn-sm"
+          title="Excluir"
+          ><i class="fa fa-trash" aria-hidden="true"></i
+        ></a>
+      </td>
+    </tr>
+
+    {% empty %}
+    <tr>
+      <td tabindex="0" colspan="3">Nenhum titulo encontrado</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Back to Top -->
+  <a href="#" aria-label="voltar ao inicio" class="btn btn-sm btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+</div>
+
+{% endblock %}

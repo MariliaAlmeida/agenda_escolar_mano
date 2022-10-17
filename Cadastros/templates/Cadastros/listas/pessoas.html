@@ -1,0 +1,56 @@
+{% extends 'Paginas/modelo.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3 tabindex="0">Lista de Pessoas</h3>
+<a href="{% url 'meusdados' %}" class="btn btn-primary btn-sm">Meus Dados</a>
+<hr>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th tabindex="0">Nome</th>
+      <th tabindex="0">Apelido</th>
+      <th tabindex="0">Nascimento</th>
+      <th tabindex="0">CPF</th>
+      <th tabindex="0">RG</th>
+      <th tabindex="0">Opções</th>
+    </tr>
+    {% for pessoa in object_list %}
+    <tr>
+      <td>
+        {{ pessoa.Nome }}
+      </td>
+      <td>
+        {{ pessoa.Apelido }}
+      </td>
+      <td>
+        {{ Pessoa.DataNascimento }}
+      </td>
+      <td>
+        {{ Pessoa.CPF }}
+      </td>
+      <td>
+        {{ Pessoa.RG }}
+      </td>
+      <td>
+        <a href="{% url 'meusdados' pessoa.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td tabindex="0" colspan="3">
+        Nenhuma pessoa cadastrada
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Back to Top -->
+  <a href="#" aria-label="voltar ao inicio" class="btn btn-sm btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+</div>
+
+{% endblock %}
