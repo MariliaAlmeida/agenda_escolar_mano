@@ -1,0 +1,63 @@
+{% extends 'Paginas/modelo.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<title>Página Inicial</title>
+{% endblock %}
+{% block conteudo %}
+
+
+
+<!-- Service Start -->
+  <div class="container-xxl py-5">
+      
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="service-item text-center pt-3">
+            <div class="p-4">
+              <i class="fa fa-3x fa fa-graduation-cap text-primary mb-4"></i>
+                <h5 tabindex="0" class="mb-3">Professores</h5>
+                <a tabindex="0" href="{% url 'professores-listar' %}">Acesso Rápido Cadastro - Professores</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="service-item text-center pt-3">
+            <div class="p-4">
+              <i class="fa fa-3x fa fa-user-plus text-primary mb-4"></i>
+                <h5 tabindex="0" class="mb-3">Alunos</h5>
+                <a tabindex="0" href="{% url 'alunos-listar' %}">Acesso Rápido - Cadastro Alunos</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="service-item text-center pt-3">
+            <div class="p-4">
+              <i class="fa fa-3x fa fa-table text-primary mb-4"></i>
+              <h5 tabindex="0" class="mb-3">Tabela de Preços</h5>
+              <a tabindex="0" href="{% url 'tabelas-listar' %}">Acesso Rápido Cadastro - Tabela de Preços</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+          <div class="service-item text-center pt-3">
+            <div class="p-4">
+              <i class="fa fa-3x fa fa-calendar-check-o text-primary mb-4"></i>
+              <h5 tabindex="0" class="mb-3">Títulos Bancários</h5>
+              <a tabindex="0" href="{% url 'titulosbancarios-listar' %}">Acesso Rápido Cadastro - Títulos Bancários</a>
+            </div>
+          </div>
+        </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Service End -->
+
+{% endblock %}#
+
+
+
+
